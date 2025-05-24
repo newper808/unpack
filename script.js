@@ -1,7 +1,6 @@
 const sections = document.querySelectorAll('.question-section');
         const results = document.querySelectorAll('.result');
         const progressBar = document.getElementById('progressBar');
-        let currentProgress = 0;
         
         function updateProgress(step, total) {
             const percentage = (step / total) * 100;
@@ -34,121 +33,82 @@ const sections = document.querySelectorAll('.question-section');
             progressBar.style.width = '0%';
         }
         
-        // Question flow logic
+        // Question 1: Display or Useful
         document.querySelectorAll('input[name="q1"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                updateProgress(1, 6);
-                if (this.value === 'yes') {
-                    showSection('q2');
+                updateProgress(1, 4);
+                if (this.value === 'display') {
+                    showSection('q2-display');
                 } else {
-                    showSection('q3');
+                    showSection('q2-useful');
                 }
             });
         });
         
-        document.querySelectorAll('input[name="q2"]').forEach(radio => {
+        // Display Path: ME or Sentimental
+        document.querySelectorAll('input[name="q2-display"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                updateProgress(2, 6);
-                if (this.value === 'yes') {
-                    showResult('result-organize');
+                updateProgress(2, 4);
+                if (this.value === 'me') {
+                    showSection('q3-place');
                 } else {
-                    showSection('q3');
+                    showSection('q4-emotions');
                 }
             });
         });
         
-        document.querySelectorAll('input[name="q3"]').forEach(radio => {
+        // Display: Have a place?
+        document.querySelectorAll('input[name="q3-place"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                updateProgress(3, 6);
-                if (this.value === 'yes') {
-                    showResult('result-sell');
-                } else {
-                    showSection('q4');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="q4"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(4, 6);
-                if (this.value === 'yes') {
-                    showSection('s1');
-                } else {
-                    showSection('q5');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="q5"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(5, 6);
-                if (this.value === 'yes') {
-                    showSection('q6');
-                } else {
-                    showResult('result-give');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="q6"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(6, 6);
-                if (this.value === 'yes') {
-                    showResult('result-store');
-                } else {
-                    showResult('result-give');
-                }
-            });
-        });
-        
-        // Sentimental flow
-        document.querySelectorAll('input[name="s1"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(5, 6);
-                if (this.value === 'yes') {
-                    showSection('s2');
-                } else {
-                    showSection('s3');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="s2"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(6, 6);
-                if (this.value === 'yes') {
-                    showResult('result-store');
-                } else {
-                    showSection('s4');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="s3"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(6, 7);
-                if (this.value === 'yes') {
-                    showResult('result-store');
-                } else {
-                    showSection('s5');
-                }
-            });
-        });
-        
-        document.querySelectorAll('input[name="s4"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                updateProgress(6, 7);
+                updateProgress(3, 4);
                 if (this.value === 'yes') {
                     showResult('result-organize');
                 } else {
-                    showSection('s5');
+                    showResult('result-store');
                 }
             });
         });
         
-        document.querySelectorAll('input[name="s5"]').forEach(radio => {
+        // Sentimental: Positive emotions?
+        document.querySelectorAll('input[name="q4-emotions"]').forEach(radio => {
             radio.addEventListener('change', function() {
-                updateProgress(7, 7);
+                updateProgress(3, 4);
+                if (this.value === 'yes') {
+                    showSection('q3-place');
+                } else {
+                    showSection('q5-worth');
+                }
+            });
+        });
+        
+        // Useful: Will use in 6 months?
+        document.querySelectorAll('input[name="q2-useful"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateProgress(2, 4);
+                if (this.value === 'yes') {
+                    showSection('q3-useful-place');
+                } else {
+                    showSection('q5-worth');
+                }
+            });
+        });
+        
+        // Useful: Have a place?
+        document.querySelectorAll('input[name="q3-useful-place"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateProgress(3, 4);
+                if (this.value === 'yes') {
+                    showResult('result-organize');
+                } else {
+                    showResult('result-store');
+                }
+            });
+        });
+        
+        // Worth selling?
+        document.querySelectorAll('input[name="q5-worth"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateProgress(4, 4);
                 if (this.value === 'yes') {
                     showResult('result-sell');
                 } else {
