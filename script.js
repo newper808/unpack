@@ -1,5 +1,4 @@
-    <script>
-        const sections = document.querySelectorAll('.question-section');
+const sections = document.querySelectorAll('.question-section');
         const results = document.querySelectorAll('.result');
         const progressBar = document.getElementById('progressBar');
         let currentProgress = 0;
@@ -157,4 +156,3 @@
                 }
             });
         });
-    </script>
